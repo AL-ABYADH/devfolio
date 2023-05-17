@@ -33,19 +33,22 @@ class _MainPageState extends State<MainPage> {
     App.init(context);
     final drawerProvider = Provider.of<DrawerProvider>(context);
 
-    return Scaffold(
-      key: drawerProvider.key,
-      extendBodyBehindAppBar: true,
-      drawer: !Responsive.isDesktop(context) ? const _MobileDrawer() : null,
-      body: SafeArea(
-        child: Stack(
-          children: [
-            const _Body(),
-            const ArrowOnTop(),
-            Responsive.isTablet(context) || Responsive.isMobile(context)
-                ? const _NavBarTablet()
-                : const _NavbarDesktop(),
-          ],
+    return ChangeNotifierProvider.value(
+      value: ScrollProvider(context),
+      child: Scaffold(
+        key: drawerProvider.key,
+        extendBodyBehindAppBar: true,
+        drawer: !Responsive.isDesktop(context) ? const _MobileDrawer() : null,
+        body: SafeArea(
+          child: Stack(
+            children: [
+              const _Body(),
+              const ArrowOnTop(),
+              Responsive.isTablet(context) || Responsive.isMobile(context)
+                  ? const _NavBarTablet()
+                  : const _NavbarDesktop(),
+            ],
+          ),
         ),
       ),
     );

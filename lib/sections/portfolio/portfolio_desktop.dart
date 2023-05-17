@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:folio/configs/configs.dart';
 import 'package:folio/constants.dart';
 import 'package:folio/utils/project_utils.dart';
@@ -21,29 +22,32 @@ class _PortfolioDesktopState extends State<PortfolioDesktop> {
       child: Column(
         children: [
           const CustomSectionHeading(
-            text: "\nPortfolio",
+            text: "\nProjects",
           ),
           const CustomSectionSubHeading(
             text: "Here are few samples of my previous work :)\n\n",
           ),
-          Wrap(
-            alignment: WrapAlignment.center,
-            crossAxisAlignment: WrapCrossAlignment.center,
-            runSpacing: AppDimensions.normalize(10),
-            children: ProjectUtils.banners
-                .asMap()
-                .entries
-                .map(
-                  (e) => ProjectCard(
-                    banner: e.value,
-                    projectIcon: ProjectUtils.icons[e.key],
-                    projectLink: ProjectUtils.links[e.key],
-                    projectTitle: ProjectUtils.titles[e.key],
-                    projectDescription: ProjectUtils.description[e.key],
-                  ),
-                )
-                .toList(),
-          ),
+          Builder(builder: (context) {
+            final projectsData = Provider.of<ProjectUtils>(context);
+            return Wrap(
+              alignment: WrapAlignment.center,
+              crossAxisAlignment: WrapCrossAlignment.center,
+              runSpacing: AppDimensions.normalize(10),
+              children: projectsData.banners
+                  .asMap()
+                  .entries
+                  .map(
+                    (e) => ProjectCard(
+                      banner: e.value,
+                      projectIcon: projectsData.icons[e.key],
+                      projectLink: projectsData.links[e.key],
+                      projectTitle: projectsData.titles[e.key],
+                      projectDescription: projectsData.description[e.key],
+                    ),
+                  )
+                  .toList(),
+            );
+          }),
           Space.y2!,
           SizedBox(
             height: AppDimensions.normalize(14),

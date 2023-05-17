@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:folio/provider/app_provider.dart';
 import 'package:folio/provider/drawer_provider.dart';
-import 'package:folio/provider/scroll_provider.dart';
 import 'package:folio/sections/main/main_section.dart';
+import 'package:folio/utils/project_utils.dart';
 import 'package:provider/provider.dart';
 import 'package:url_strategy/url_strategy.dart';
 import 'package:folio/configs/core_theme.dart' as theme;
@@ -27,7 +27,7 @@ class MyAppState extends State<MyApp> {
       providers: [
         ChangeNotifierProvider(create: (_) => AppProvider()),
         ChangeNotifierProvider(create: (_) => DrawerProvider()),
-        ChangeNotifierProvider(create: (_) => ScrollProvider()),
+        ChangeNotifierProvider(create: (_) => ProjectUtils()),
       ],
       child: Consumer<AppProvider>(
         builder: (context, value, _) => MaterialChild(
@@ -59,10 +59,16 @@ class _MaterialChildState extends State<MaterialChild> {
   }
 
   @override
+  void didChangeDependencies() {
+    Provider.of<ProjectUtils>(context).loadProjects();
+    super.didChangeDependencies();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Hamza',
+      title: 'Yahya',
       theme: theme.themeLight,
       darkTheme: theme.themeDark,
       themeMode: widget.provider.themeMode,

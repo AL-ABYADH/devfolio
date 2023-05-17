@@ -1,14 +1,10 @@
 import 'package:folio/configs/configs.dart';
 import 'package:folio/utils/about_utils.dart';
-import 'package:folio/utils/utils.dart';
-import 'package:folio/utils/work_utils.dart';
 
 import 'package:folio/widget/custom_text_heading.dart';
-import 'package:universal_html/html.dart' as html;
 import 'package:flutter/material.dart';
 import 'package:folio/constants.dart';
 import 'package:folio/widget/about_me_data.dart';
-import 'package:folio/widget/community_button.dart';
 import 'package:folio/widget/tech_widget.dart';
 
 class AboutTab extends StatelessWidget {
@@ -20,7 +16,7 @@ class AboutTab extends StatelessWidget {
     double width = MediaQuery.of(context).size.width;
 
     return Container(
-      padding: Space.h,
+      padding: const EdgeInsets.symmetric(horizontal: 60),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
@@ -35,15 +31,11 @@ class AboutTab extends StatelessWidget {
             ),
           ),
           Space.y1!,
-          Image.asset(
-            StaticUtils.mobilePhoto,
-            height: height * 0.27,
-          ),
           SizedBox(
             height: height * 0.03,
           ),
           Text(
-            "Who am I?",
+            "Who I am",
             style: AppText.b2!.copyWith(
               color: AppTheme.c!.primary,
             ),
@@ -78,7 +70,7 @@ class AboutTab extends StatelessWidget {
               color: AppTheme.c!.primary,
             ),
           ),
-          Row(
+          Wrap(
             children: kTools
                 .map(
                   (e) => ToolTechWidget(techName: e),
@@ -98,11 +90,11 @@ class AboutTab extends StatelessWidget {
                 children: const [
                   AboutMeData(
                     data: "Name",
-                    information: "Muhammad Hamza",
+                    information: "Yahya Al-Abyadh",
                   ),
                   AboutMeData(
                     data: "Age",
-                    information: "24",
+                    information: "20",
                   ),
                 ],
               ),
@@ -114,58 +106,17 @@ class AboutTab extends StatelessWidget {
                 children: const [
                   AboutMeData(
                     data: "Email",
-                    information: "hamza.6.shakeel@gmail.com",
+                    information: "yahyaalabyadh71@gmail.com",
                   ),
                   AboutMeData(
                     data: "From",
-                    information: "Attock, PK",
+                    information: "Sana'a, Yemen",
                   ),
                 ],
               ),
             ],
           ),
           Space.y1!,
-          Row(
-            children: [
-              SizedBox(
-                height: AppDimensions.normalize(13),
-                width: AppDimensions.normalize(40),
-                child: OutlinedButton(
-                  onPressed: () => html.window.open(StaticUtils.resume, 'pdf'),
-                  child: const Text(
-                    "Resume",
-                  ),
-                ),
-              ),
-              Space.x!,
-              Container(
-                width: width * 0.05,
-                decoration: BoxDecoration(
-                  border: Border(
-                    bottom: BorderSide(
-                      color: Colors.grey[900]!,
-                      width: 2.0,
-                    ),
-                  ),
-                ),
-              ),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                    children: WorkUtils.logos
-                        .asMap()
-                        .entries
-                        .map(
-                          (e) => CommunityIconBtn(
-                            icon: e.value,
-                            link: WorkUtils.communityLinks[e.key],
-                            height: WorkUtils.communityLogoHeight[e.key],
-                          ),
-                        )
-                        .toList()),
-              ),
-            ],
-          )
         ],
       ),
     );

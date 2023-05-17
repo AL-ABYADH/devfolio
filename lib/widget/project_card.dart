@@ -88,14 +88,14 @@ class ProjectCardState extends State<ProjectCard> {
               children: [
                 widget.projectIcon != null
                     ? (width > 1135 || width < 950)
-                        ? Image.asset(
+                        ? Image.network(
                             widget.projectIcon!,
                             height: height * 0.05,
                           )
                         : Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Image.asset(
+                              Image.network(
                                 widget.projectIcon!,
                                 height: height * 0.03,
                               ),
@@ -147,7 +147,7 @@ class ProjectCardState extends State<ProjectCard> {
               child: FittedBox(
                 fit: BoxFit.fill,
                 child: widget.banner != null
-                    ? Image.asset(
+                    ? Image.network(
                         widget.banner!,
                       )
                     : Container(),

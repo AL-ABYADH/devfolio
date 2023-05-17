@@ -58,6 +58,7 @@ class _NavbarDesktop extends StatelessWidget {
             },
             activeColor: AppTheme.c!.primary!,
           ),
+          const Icon(Icons.dark_mode),
           Space.x!,
         ],
       ),
@@ -71,8 +72,10 @@ class _NavBarTablet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final drawerProvider = Provider.of<DrawerProvider>(context);
+    final appProvider = Provider.of<AppProvider>(context);
 
-    return Padding(
+    return Container(
+      color: appProvider.isDark ? Colors.black : Colors.white,
       padding: Space.v!,
       child: Row(
         children: [
