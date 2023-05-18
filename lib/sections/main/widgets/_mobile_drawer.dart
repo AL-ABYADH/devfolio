@@ -22,7 +22,7 @@ class _MobileDrawer extends StatelessWidget {
               const Divider(),
               ListTile(
                 leading: Icon(
-                  Icons.light_mode,
+                  Icons.dark_mode,
                   color: AppTheme.c!.primary!,
                 ),
                 title: const Text(
@@ -72,7 +72,7 @@ class _MobileDrawer extends StatelessWidget {
                   child: const ListTile(
                     leading: Icon(
                       Icons.book,
-                      color: Colors.red,
+                      color: Color.fromRGBO(233, 69, 96, 1),
                     ),
                     title: Text(
                       'RESUME',
